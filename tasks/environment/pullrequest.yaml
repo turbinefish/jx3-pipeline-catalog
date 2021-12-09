@@ -25,16 +25,18 @@ spec:
               memory: 512Mi
           workingDir: /workspace/source
         steps:
-        - args:
-          - pr
-          command:
-          - make
-          envFrom:
+        - envFrom:
           - secretRef:
               name: jx-boot-job-env-vars
               optional: true
           image: ghcr.io/jenkins-x/jx-boot:3.2.231
           name: make-pr
+          script: |
+            #!/bin/sh
+            mkdir -p /workspace/source
+            cd /workspace/source
+            make pr
+          workingDir: /workspace
           resources: {}
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/kubetest/environment.yaml@versionStream
           name: ""
