@@ -45,6 +45,7 @@ spec:
     resources: {}
     script: |
       #!/usr/bin/env sh
+      mkdir -p /workspace/source
       cd source
       counter=0
       until [ "$counter" -eq 3 ]; do
