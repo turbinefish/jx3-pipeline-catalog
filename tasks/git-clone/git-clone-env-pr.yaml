@@ -45,6 +45,7 @@ spec:
     resources: {}
     script: |
       #!/usr/bin/env sh
+      cd source
       counter=0
       until [ "$counter" -eq 3 ]; do
         # lets avoid git rebase/merge conflicts on promotions
@@ -56,7 +57,7 @@ spec:
         fi
       done
       exit 1
-    workingDir: /workspace/source
+    workingDir: /workspace
   workspaces:
   - description: The git repo will be cloned onto the volume backing this workspace
     mountPath: /workspace
